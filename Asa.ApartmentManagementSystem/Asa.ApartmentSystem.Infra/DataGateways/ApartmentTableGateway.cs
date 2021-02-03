@@ -54,5 +54,27 @@ namespace Asa.ApartmentSystem.Infra.DataGateways
             }
             return result;
         }
-    }
+
+		public async Task<int> InsertApartmentAsync(ApartmentUnitDTO apartment)
+		{
+            int id = 0;
+            using(var connection = new SqlConnection(_connectionString))
+			{
+                using(var cmd = new SqlCommand())
+				{
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "[dbo].[create_apartment]";
+                    cmd.Parameters.AddWithValue("@building_id", apartment.BuidlingId);
+                    cmd.Parameters.AddWithValue("@number", apartment.Number);
+                    cmd.Parameters.AddWithValue("@area", apartment.Area);
+                    cmd.Parameters.AddWithValue("@description", apartment.Description);
+                    cmd.Connection = connection;
+                    connection.Open();
+                    var result = await cmd.ExecuteScalarAsync();
+                    id = Convert.ToInt32(result);
+				}
+			}
+            return id;
+		}
+	}
 }

@@ -9,5 +9,7 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.DataGateways
     public interface IApartmentTableGateway
     {
         Task<IEnumerable<ApartmentUnitDTO>> GetAllByBuildingId(int buildingId);
+
+        Task<int> InsertApartmentAsync(ApartmentUnitDTO apartment);
     }
 }

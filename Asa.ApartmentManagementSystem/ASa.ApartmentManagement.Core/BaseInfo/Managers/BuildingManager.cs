@@ -29,7 +29,20 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
 
         }
 
-        private static void ValidateBuilding(BuildingDTO building)
+        public async Task AddApartment(ApartmentUnitDTO apartment)
+		{
+            ValidateApartment(apartment);
+            var tableGateway = _tablegatwayFactory.CreateIApartmentTableGateway();
+            var id = await tableGateway.InsertApartmentAsync(apartment);
+            apartment.Id = id;
+		}
+
+		private void ValidateApartment(ApartmentUnitDTO apartment)
+		{
+			throw new NotImplementedException();
+		}
+
+		private static void ValidateBuilding(BuildingDTO building)
         {
             const int MAX_BUILDING_NAME_LENGTH = 50;
             var buildingNameIsValid = string.IsNullOrWhiteSpace(building.Name) || building.Name.Length > MAX_BUILDING_NAME_LENGTH;
