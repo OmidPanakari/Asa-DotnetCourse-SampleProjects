@@ -1,8 +1,7 @@
 ﻿CREATE TABLE [dbo].[Person]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
-    [building_id] INT NOT NULL, 
-    [first_name] NCHAR(20) NOT NULL, 
-    [last_name] NCHAR(20) NOT NULL, 
-    CONSTRAINT [FK_Person_Building] FOREIGN KEY ([building_id]) REFERENCES [dbo].[Building]([id])
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [first_name] NVARCHAR(50) NOT NULL, 
+    [last_name] NVARCHAR(50) NOT NULL, 
+    [phone_number] NVARCHAR(20) NOT NULL, 
 )

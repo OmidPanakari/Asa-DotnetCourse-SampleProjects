@@ -36,6 +36,19 @@ namespace ASa.ApartmentManagement.Core.BaseInfo.Managers
             var id = await tableGateway.InsertApartmentAsync(apartment);
             apartment.Id = id;
 		}
+        
+        public async Task AddPerson(PersonDTO person)
+		{
+            ValidatePerson(person);
+            var tableGateway = _tablegatwayFactory.CreatePersonTableGateway();
+            var id = await tableGateway.InsertPersonAsync(person);
+            person.Id = id;
+		}
+
+		private void ValidatePerson(PersonDTO person)
+		{
+			throw new NotImplementedException();
+		}
 
 		private void ValidateApartment(ApartmentUnitDTO apartment)
 		{
